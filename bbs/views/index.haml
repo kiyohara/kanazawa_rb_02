@@ -1,0 +1,36 @@
+!!! XML
+!!! Strict
+
+%html
+  %head
+    %title Sinatra Sample BBS
+    %meta{ :content => "text/html", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "style.css" }
+  %body
+    %h1 Sinatra Sample BBS
+
+    %form{ :method => "post", :action => "/post" }
+      %table
+        %tr
+          %td 名前
+          %td
+            %input{ :type => "text", :name => "name" }
+        %tr
+          %td タイトル
+          %td
+            %input{ :type => "text", :name => "title" }
+        %tr
+          %td 本文
+          %td
+            %textarea{ :name => "body", :cols => 40, :rows => 10 }
+        %tr
+          %td{ :colspan => 2 }
+            %input{ :type => "submit" }
+
+    - @messages.each do |message|
+      .message
+        .head
+          %span.title= h message.title
+          %span.name== by #{message.name}
+        .body= (h message.body).gsub(/\n/,'<br>')
+
